@@ -1,0 +1,31 @@
+# Task: Anty Gravity Frontend Implementation
+
+- [ ] Project Setup <!-- id: 0 -->
+    - [ ] Initialize Next.js 14 app with TypeScript and TailwindCSS <!-- id: 1 -->
+    - [ ] Install dependencies (Zustand, Lucide React, Framer Motion, DnD Kit, ShadCN UI) <!-- id: 2 -->
+    - [ ] Set up folder structure <!-- id: 3 -->
+- [ ] Mock Data & Services <!-- id: 4 -->
+    - [ ] Create mock data files (users, boards, lists, cards, comments, notifications) <!-- id: 5 -->
+    - [ ] Implement mock service layer for API simulation <!-- id: 6 -->
+    - [ ] Set up Zustand stores for state management <!-- id: 7 -->
+- [ ] Core Components <!-- id: 8 -->
+    - [ ] Navbar and Sidebar components <!-- id: 9 -->
+    - [ ] Generic UI components (Modals, Avatars, Tags) <!-- id: 10 -->
+    - [ ] Board-specific components (BoardGrid, BoardCard) <!-- id: 11 -->
+- [ ] Kanban Board Implementation <!-- id: 12 -->
+    - [ ] BoardCanvas with horizontal scrollable lists <!-- id: 13 -->
+    - [ ] ListColumn with "Add card" functionality <!-- id: 14 -->
+    - [ ] CardItem with labels, due date, and members <!-- id: 15 -->
+    - [ ] Drag and Drop integration with DnD Kit <!-- id: 16 -->
+- [ ] Pages & Routing <!-- id: 17 -->
+    - [ ] / (Landing page) with modern SaaS aesthetic <!-- id: 18 -->
+    - [ ] /dashboard for board overview <!-- id: 19 -->
+    - [ ] /board/[id] for the Kanban experience <!-- id: 20 -->
+- [ ] Features & Polish <!-- id: 21 -->
+    - [ ] Card details modal with comment thread <!-- id: 22 -->
+    - [ ] Dark mode toggle <!-- id: 23 -->
+    - [ ] Responsive design (mobile stacking, tablet horizontal scroll) <!-- id: 24 -->
+    - [ ] Animations with Framer Motion <!-- id: 25 -->
+- [ ] Final Verification <!-- id: 26 -->
+    - [ ] Verify build and run locally <!-- id: 27 -->
+    - [ ] Ensure all mock functions work as expected <!-- id: 28 -->
