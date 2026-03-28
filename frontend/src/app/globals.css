@@ -1,66 +1,52 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 270 40% 95%; /* Light lavender bg #F3EEF9 */
+    --foreground: 0 0% 18%;   /* #2D2D2D */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 18%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 18%;
  
-    --primary: 262 80% 57%; /* #6A3DE8 */
+    --primary: 327 65% 58%; /* Pink-magenta #D94F9D */
     --primary-foreground: 210 40% 98%;
  
-    --secondary: 256 89% 68%; /* #8A63F6 */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 282 39% 74%; /* Soft purple #C8A2D6 */
+    --secondary-foreground: 0 0% 18%;
  
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 270 30% 92%;
+    --muted-foreground: 0 0% 42%; /* #6B6B6B */
  
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 327 65% 58%;
+    --accent-foreground: 210 40% 98%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 262 80% 57%;
+    --border: 270 20% 88%;
+    --input: 270 20% 88%;
+    --ring: 327 65% 58%;
  
-    --radius: 0.75rem;
+    --radius: 1rem;
+    --brand-gradient: linear-gradient(135deg, #E6D6F5 0%, #D94F9D 100%);
+    --navbar-bg: rgba(255, 255, 255, 0.4);
+    
+    /* New Palette Colors */
+    --lavender: #E6D6F5;
+    --soft-purple: #C8A2D6;
+    --pink-magenta: #D94F9D;
+    --deep-rose: #B83280;
   }
- 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 262 80% 57%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 262 80% 57%;
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(135, 31, 255, 0.05);
   }
 
   body {
@@ -71,7 +57,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-mono: var(--font-geist-mono);
 }
 
@@ -86,10 +72,10 @@
 }
 
 .quill-premium-wrapper .ql-container.ql-snow {
-  border: 1px solid #E5E7EB !important;
+  border: 1px solid hsl(var(--border)) !important;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  background: white;
+  background: hsl(var(--card));
   min-height: 150px;
   font-family: inherit;
 }
@@ -98,7 +84,7 @@
   padding: 1rem;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #1F2937;
+  color: hsl(var(--foreground));
 }
 
 .quill-premium-wrapper .ql-editor.ql-blank::before {
@@ -137,7 +123,7 @@
 
 .rich-text-view strong, .tiptap strong {
   font-weight: 800 !important;
-  color: #1F2937 !important;
+  color: hsl(var(--foreground)) !important;
 }
 
 .rich-text-view em, .tiptap em {
@@ -151,8 +137,8 @@
 .tiptap.is-editor-empty p:first-child::before,
 .tiptap p.is-editor-empty:first-child::before,
 .tiptap p.is-empty:first-child::before {
-  color: #1F2937 !important;
-  opacity: 0.4 !important;
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 0.6 !important;
   content: attr(data-placeholder) !important;
   float: left !important;
   height: 0 !important;
