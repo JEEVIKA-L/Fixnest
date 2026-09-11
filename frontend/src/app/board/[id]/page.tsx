@@ -4,12 +4,14 @@ import React, { useEffect } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { Navbar } from '@/components/layout/Navbar';
 import { BoardCanvas } from '@/components/boards/BoardCanvas';
+import { TableView } from '@/components/boards/TableView';
 import { useBoardStore } from '@/stores/useBoardStore';
+import { useCards } from '@/hooks/useCards';
 import { useListStore } from '@/stores/useListStore';
 import { useUIStore } from '@/stores/useUIStore';
 import { useLists } from '@/hooks/useLists';
 import { List } from '@/types';
-import { Share2, MoreHorizontal, Plus, Search, Filter, Settings, Zap, Edit2, Columns, Star, Users, Palette, Bell } from 'lucide-react';
+import { Share2, MoreHorizontal, Plus, Search, Filter, Settings, Zap, Edit2, Columns, Star, Users, Palette, Bell, LayoutGrid, Table2 } from 'lucide-react';
 import { MemberAvatar } from '@/components/common/MemberAvatar';
 import { mockUsers } from '@/mock-data/users';
 import { CardModal } from '@/components/cards/CardModal';
@@ -35,7 +37,9 @@ export default function BoardPage() {
  const { openCardModal, activeCardId } = useUIStore();
  const { activeBoard, fetchBoardById, updateBoard, isLoading } = useBoardStore();
  const { lists, updateList } = useLists(id as string);
+ const { allCards } = useCards();
  const { fetchCurrentUser } = useUserStore();
+ const [viewMode, setViewMode] = React.useState<'kanban' | 'table'>('kanban');
  const [isEditingTitle, setIsEditingTitle] = React.useState(false);
  const [title, setTitle] = React.useState('');
  const [showMenu, setShowMenu] = React.useState(false);
@@ -327,6 +331,25 @@ export default function BoardPage() {
  <Palette size={16} className="text-gray-500 dark:text-gray-400" />
  Style Board
  </button>
+  <button
+  onClick={() => {
+  setViewMode(viewMode === 'kanban' ? 'table' : 'kanban');
+  setShowMenu(false);
+  }}
+  className="w-full px-4 py-2 flex items-center gap-3 hover:bg-black/5 transition-colors text-sm font-bold text-left"
+  >
+  {viewMode === 'kanban' ? (
+  <>
+  <Table2 size={16} className="text-[#D94F9D]" />
+  <span className="text-[#D94F9D]">View as Table</span>
+  </>
+  ) : (
+  <>
+  <LayoutGrid size={16} className="text-[#D94F9D]" />
+  <span className="text-[#D94F9D]">View as Kanban</span>
+  </>
+  )}
+  </button>
  </div>
  <div className="h-px bg-gray-100" />
 
@@ -361,10 +384,14 @@ export default function BoardPage() {
  </div>
  </header>
 
- {/* Board Canvas Area */}
- <div className="flex-1 overflow-hidden">
- <BoardCanvas board={activeBoard} />
- </div>
+   {/* Board Canvas Area */}
+  <div className="flex-1 overflow-hidden flex flex-col">
+  {viewMode === 'kanban' ? (
+  <BoardCanvas board={activeBoard} />
+  ) : (
+  <TableView board={activeBoard} lists={lists} allCards={allCards} />
+  )}
+  </div>
 
  <CardModal />
  </main>

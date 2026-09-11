@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { createPortal } from 'react-dom';
+
 import { useUIStore } from '@/stores/useUIStore';
 import { useCardStore } from '@/stores/useCardStore';
 import { useUserStore } from '@/stores/useUserStore';
@@ -57,6 +59,8 @@ export const CardModal = () => {
  const { cards, updateCard, deleteCard, addCard } = useCardStore();
  const { currentUser } = useUserStore();
  const { activeBoard } = useBoardStore();
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => { setIsMounted(true); }, []);
  const [isEditingDescription, setIsEditingDescription] = React.useState(false);
  const [description, setDescription] = React.useState('');
  const [isEditingTitle, setIsEditingTitle] = React.useState(false);
@@ -265,7 +269,9 @@ export const CardModal = () => {
  const headerIconColor = firstLabel ? firstLabel.color : boardColor;
 
 
- return (
+  if (!isMounted) return null;
+
+  return createPortal(
  <AnimatePresence key="modal-presence">
  <div key="modal-overlay" className="fixed inset-0 z-[100] flex items-center justify-center p-4">
  {/* Full Image Overlay */}
@@ -313,7 +319,7 @@ export const CardModal = () => {
  initial={{ opacity: 0, scale: 0.95, y: 20 }}
  animate={{ opacity: 1, scale: 1, y: 0 }}
  exit={{ opacity: 0, scale: 0.95, y: 20 }}
- className="glass-panel w-full max-w-4xl rounded-[2rem] shadow-2xl shadow-[#D94F9D]/10 relative z-10 overflow-hidden flex flex-col h-[90vh]"
+ className="bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl shadow-[#D94F9D]/10 relative z-10 overflow-hidden flex flex-col h-[90vh]"
  >
  {/* Overdue Dialog Overlay */}
  <AnimatePresence key="overdue-presence">
@@ -353,8 +359,8 @@ export const CardModal = () => {
  )}
 
  <div 
- style={{ backgroundColor: `rgba(230, 214, 245, 0.3)` }} 
- className="sticky top-0 z-20 pl-6 pr-10 py-6 border-b border-[#E6D6F5] backdrop-blur-xl"
+ style={{ backgroundColor: '#FFFFFF' }} 
+ className="sticky top-0 z-20 pl-6 pr-10 py-6 border-b border-[#E6D6F5]"
  >
  {/* Title row */}
  <div className="flex items-start justify-between gap-4">
@@ -720,5 +726,5 @@ export const CardModal = () => {
  onCancel={() => setIsConfirmDeleteOpen(false)}
  />
  </AnimatePresence>
- );
+  , document.body);
 };

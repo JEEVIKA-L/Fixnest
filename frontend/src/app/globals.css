@@ -43,9 +43,8 @@
   }
 
   .glass-panel {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: white;
+    border: 1px solid #E6D6F5;
     box-shadow: 0 8px 32px 0 rgba(135, 31, 255, 0.05);
   }
 
